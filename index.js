@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-// Add this line to test the DB connection immediately
+// Tambah garis untuk tes koneksi
 require("./config/database");
 
 const app = express();
@@ -13,9 +13,9 @@ const PORT = process.env.PORT || 3000;
 // MIDDLEWARE (The Gatekeepers)
 // ==========================================
 
-// 1. CORS: Allow the Frontend (Vite) to talk to us
-// If their Vite runs on port 5173, we can restrict it here,
-// but for development, we allow all origin (*).
+// 1. CORS: Mengizinkan Frontend (Vite) dapat berinteraksi dengan API ini
+// Jika Vite berjalan di port 5173, stp disini juga harus diizinkan.
+// untuk development, kita mengizinkan semua (*).
 app.use(cors());
 
 // 2. Body Parser: Accept JSON data from React
@@ -34,11 +34,16 @@ app.get("/", (req, res) => {
 });
 
 // ==========================================
-// IMPORT ROUTES (We will create these later)
+// IMPORT ROUTES (Routes disimpan disini)
 // ==========================================
 // const productRoutes = require('./routes/productRoutes');
 // app.use('/api/products', productRoutes);
 
+const productRoutes = require("./routes/productRoutes");
+app.use("/api/products", productRoutes);
+
+const transaksiRoutes = require("./routes/transaksiRoutes");
+app.use("/api/checkout", transaksiRoutes);
 // ==========================================
 // START SERVER
 // ==========================================
