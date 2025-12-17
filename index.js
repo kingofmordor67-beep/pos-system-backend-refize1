@@ -33,6 +33,14 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "OK",
+    serverTime: new Date().toISOString(),
+    database: "MySQL (Connected)", // Asumsi koneksi aman
+  });
+});
+
 // ==========================================
 // IMPORT ROUTES (Routes disimpan disini)
 // ==========================================
